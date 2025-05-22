@@ -1,5 +1,6 @@
 use std::io::{prelude::*, BufReader};
 use std::net::{ TcpStream};
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
 
 struct client{
@@ -8,12 +9,13 @@ struct client{
     message: String,
     server_ip: Int ,
     status: String,
+    stream: TcpStream,
 }
 
 impl Client{
 
     fn connection(&self) -> std::io::Result<()> {
-        match Tcpstream::connect(self.address){
+        match Tcpstream::connect("address/port"){
             Ok(stream) => println!("{} is connected to {}", self.name, self.address),
             Err(e) => {
                 println!("Failed to connect: {}", e);
@@ -23,7 +25,8 @@ impl Client{
     }
 
     fn disconnect(&self) {
-        println!("{} is disconnected from {}", self.name, self.address);
+        drop(self.stream);
+        //println!("{} is disconnected from {}", self.name, self.address);
     }
 
     fn send_message(&self, message: &str) {
