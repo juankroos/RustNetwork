@@ -1,3 +1,23 @@
+
+struct server{
+    name: String,
+    address: i32,
+    status: String,
+
+    /*
+    fn connection(&self) {
+        println!("{} is connected to {}", self.name, self.address);
+    }
+    fn disconnect(&self) {
+        println!("{} is disconnected from {}", self.name, self.address);
+    }
+
+    fn send_message(&self, message: &str) {
+        println!("{} sent: {}", self.name, message);
+    }*/
+}
+
+
 // users connection handler using tokio
 
 use tokio::net::TcpListener;
