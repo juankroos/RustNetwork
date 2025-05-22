@@ -1,12 +1,36 @@
-use std::net::{TcpListener,TcpStream};
+// users connection handler using tokio
 
-fn handle_client(stream: TcpStream) {
-    
-}
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:80")?;
-    for stream in listener.incoming(){
-        handle_client(stream?);
+use tokio::net::TcpListener;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+#[tokio::main]
+async fn connect_handler( ){
+    let conn_listerner = TcpListener::bind("127.0.0.1:0").await.unwrap();
+    println!("Server is listening on {}", conn_listerner.local_addr().unwrap());
+    loop{
+        match conn_listerner.accept().await{
+            Ok((mut stream, addr)) => {
+                println!("New connection from {} bla bla bla....", addr);
+                tokio::spawn(async move {
+                    let mut buffer = [0;512];
+                    match stream.read(&mut buffer).await{
+                        //message send here
+                        /*Ok(_) =>{
+                            println!("Received: {}", String::from_utf8_lossy(&buffer));
+                            stream.write_all(b"HTTP/1.1 200 OK\r\n\r\n").await.unwrap();
+                        }
+                        Err(e) => {
+                            println!("Error reading from stream: {}", e);
+                            return;
+                        }*/
+                    }
+                }); 
+            }
+                Err(e) => {
+                    println!("Error accepting connection: {}", e);
+                    return;
+                }
+            }
+        
     }
-    ok(())
 }
