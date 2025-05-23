@@ -1,33 +1,4 @@
-Skip to content
 
-DEV Community
-
-
-0
-Jump to Comments
-
-3
-Save
-
-Boost
-
-George O. E. Campbell
-George O. E. Campbell
-Posted on 30 juil. 2024
-
-
-6
-Websocket starter in Rust with client and server example
-#
-rust
-#
-websocket
-#
-server
-#
-client
-Server code for websockets
-(server): https://github.com/campbellgoe/rust_websocket_server
 
 use tokio::net::TcpListener;
 use tokio_tungstenite::accept_async;
@@ -63,16 +34,6 @@ async fn handle_connection(stream: tokio::net::TcpStream) -> Result<()> {
 
     Ok(())
 }
-Cargo.toml (server):
-
-[dependencies]
-tokio = { version = "1.12", features = ["full"] }
-tokio-stream = "0.1"
-tokio-tungstenite = "0.23.1"
-anyhow = "1.0"
-futures-util = "0.3"
-Client websocket code
-(client): https://github.com/campbellgoe/rust_websocket_client
 
 use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::protocol::Message;
@@ -102,83 +63,6 @@ async fn main() -> Result<()> {
 
     Ok(())
 }
-client Cargo.toml
-
-[dependencies]
-tokio = { version = "1.12", features = ["full"] }
-tokio-stream = "0.1"
-tokio-tungstenite = "0.23.1"
-url = "2"
-anyhow = "1.0"
-futures-util = "0.3"
-You could use this as a starting point for your Rust websocket project.
-
-Top comments (0)
-
-Subscribe
-pic
-Add to the discussion
-Code of Conduct • Report abuse
-profile
-Datadog
-Promoted
-
-Image of Datadog
-
-Keep your GPUs in check
-This cheatsheet shows how to use Datadog’s NVIDIA DCGM and Triton integrations to track GPU health, resource usage, and model performance—helping you optimize AI workloads and avoid hardware bottlenecks.
-
-Get the Cheatsheet
-
-Read next
-aaravjoshi profile image
-Rust Concurrent Data Structures: Building Thread-Safe Collections Without Sacrificing Performance
-Aarav Joshi - Apr 4
-
-aaravjoshi profile image
-Rust Performance Boost: Building Efficient Caching Systems From Scratch
-Aarav Joshi - Mar 29
-
-aaravjoshi profile image
-Zero-Copy Parsing in Rust: A Guide to High-Performance Data Processing
-Aarav Joshi - Feb 27
-
-d2d_weizhi profile image
-The Power of Thinking..."I CAN"
-Chen Weizhi - May 16
-
-
-George O. E. Campbell
-Follow
-Web developer focused on Next.js, Three.js, JavaScript/TypeScript .
-Location
-Hereford, United Kingdom
-Education
-Diploma of Higher Education, Human Geography.
-Work
-Frontend engineer
-Joined
-30 juil. 2018
-Trending on DEV Community 
-Shariful Ehasan profile image
-Which JavaScript Loop Do You Use the Most and Why?
-#discuss #javascript #programming #webdev
-Snappy Tuts profile image
-🧬 Programming Languages Are Just Thought Interfaces
-#learning #rust #python #programming
-Anthony James profile image
-Ashkan Rajaee’s Secret Formula for Remote Meetings That Outsmart the Competition
-#productivity #remote #business #leadership
-profile
-AWS
-Promoted
-
-AWS Security LIVE! Stream
-
-Stream AWS Security LIVE!
-See how AWS is redefining security by design with simple, seamless solutions on Security LIVE!
-
-Learn More
 
 use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::protocol::Message;
