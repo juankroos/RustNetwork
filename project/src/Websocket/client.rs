@@ -236,26 +236,3 @@ async fn main() -> Result<()> {
 
     Ok(())
 }
-💎 DEV Diamond Sponsors
-
-Thank you to our Diamond Sponsors for supporting the DEV Community
-
-Neon - Official Database Partner
-Neon is the official database partner of DEV
-
-Algolia - Official Search Partner
-Algolia is the official search partner of DEV
-
-DEV Community — A space to discuss and keep up software development and manage your software career
-
-Home
-Reading List
-Tags
-About
-Contact
-Code of Conduct
-Privacy Policy
-Terms of use
-Built on Forem — the open source software that powers DEV and other inclusive communities.
-
-Made with love and Ruby on Rails. DEV Community © 2016 - 2025.
