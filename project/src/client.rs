@@ -3,6 +3,7 @@ use std::net::{ TcpStream};
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
 
+
 struct client{
     name: String,
     address: String,
@@ -29,12 +30,9 @@ impl Client{
         //println!("{} is disconnected from {}", self.name, self.address);
     }
 
-    fn send_message(&self, message: &str) {
+    fn send_message(&self, message: &str, server_ip: IpAddr) {
+
         println!("{} sent: {}", self.name, message);
     }
     }
-    fn send_message(&self, message: &str) {
-        let stream = TcpStream::connect(self.address).unwrap();
-        stream.write_all(message.as_bytes()).unwrap();
-        println!("{} sent: {}", self.name, message);
-    }
+    
