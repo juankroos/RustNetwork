@@ -7,9 +7,9 @@ use log::{info, warn};
 use tokio::sync::broadcast;
 
 #[tokio::main]
-async fn main() -> Result<()> {
+pub async fn main1() -> Result<()> {
     let addr = "";
-    let listener = TcpListener::bind(&addr).await?;
+    let listener = TcpListener::bind(&addr).await.unwrap();
     println!("WebSocket server started on ws://{}", addr);
 
     let (tx, _) = broadcast::channel(100);
@@ -23,7 +23,7 @@ async fn main() -> Result<()> {
             let addr = stream.peer_addr().unwrap();
             info!("New connection from {}", addr);
             let tx = tx.clone();
-            tokio::spam(handle_connection(stream, tx));
+            tokio::spam(handle_connection(stream));
         }
     
     
@@ -33,16 +33,18 @@ async fn main() -> Result<()> {
     async fn handle_connection(stream: tokio::net::TcpStream) -> Result<()> {
         let mut ws_stream = accept_async(stream).await?;
         info!("WebSocket connection established");
-
-        let mut rs =tx.subscribe();
+        
+        let mut rs = || { 
+            tx.subscribe();
+        };
         tokio::spawn(async move {
-            while let Ok(msg) = rx.recv().await {
+            while let Ok(msg) = rs.recv().await {
                 if ws_stream.send(Message::Text(msg)).await.is_err() {
                     warn!("Failed to send message to WebSocket client");
                     break;
                 }
             }
-            Ok::<(), anyhow::Error>(())
+            Ok::<(), anyhow::Error>(());
         });
 
         while let Some(msg) = ws_stream.next().await {
@@ -50,7 +52,7 @@ async fn main() -> Result<()> {
             if msg.is_text() {
                 let received_text = msg.to_text()?;
                 info!("Received message: {}", received_text);
-                ws_stream.send(Message::Text(received_text.to_string())).await?;
+                ws_stream.send(Message::Text(received_text.to_string().into())).await?;
             } else if msg.is_close() {
                 info!("Connection closed by client");
                 break;
@@ -59,5 +61,6 @@ async fn main() -> Result<()> {
 
         Ok(())
     }
+        Ok::<(), anyhow::Error>(())
 
 }
