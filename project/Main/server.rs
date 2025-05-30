@@ -8,7 +8,7 @@ use tokio::sync::broadcast;
 
 #[tokio::main]
 pub async fn main1() -> Result<()> {
-    let addr = "";
+    let addr = "127.0.0.1/8080";
     let listener = TcpListener::bind(&addr).await.unwrap();
     println!("WebSocket server started on ws://{}", addr);
 
