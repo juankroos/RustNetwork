@@ -1,23 +1,65 @@
-use std::{
-    io::{prelude::*, BufReader},
-    net::{TcpListener, TcpStream},
- };
-use tokio::io::{AsyncBufReadExt, AsyncReadExt};
-use tokio::net::{TcpListener, TcpStream};
- fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    for stream in listener.incoming() {
-        let stream = stream.unwrap();
-        handle_connection(stream);
+use std::thread;
+//#[path = "E:/RustNetwork/project/Main/server.rs"]
+//mod server;
+ fn main(){
+    /*thread::spawn(f);
+    thread::spawn(f);
+    thread::spawn(s);
+
+    println!(" the main thread is running");
+    let numbers = vec![1, 2, 3];
+
+
+    thread::scope(|s|{
+        s.spawn(||{
+            println!("length: {}", numbers.len());
+        });
+        s.spawn(||{
+            for n in &numbers {
+                println!("number: {}", n);
+            }
+        })
+    })*/
+    //server::main1();
+    let water  = Some("water");
+    let lemonade = Some("lemonade");
+    let void  = None;
+
+    give_adult(water);
+    give_adult(lemonade);
+    give_adult(void);
+
+    let coffee = Some("coffee");
+    let nothing = None;
+
+    drink(coffee);
+    drink(nothing);
+
+ }
+
+ fn give_adult(drink: Option<&str>) {
+    match drink{
+        Some("lemonade") => println!("you! too sugary."),
+        Some(inner) => println!("{}? how nice.", inner),
+        None => println!("no drink? on well."),
     }
  }
- fn handle_connection(mut stream: TcpStream) {
-    let buf_reader = BufReader::new(&stream);
-    let http_request: Vec<_> = buf_reader
-        .lines()
-        .map(|result| result.unwrap())
-        .take_while(|line| !line.is_empty())
-        .collect();
-    println!("Request: {http_request:#?}");
+
+ fn drink(drink: Option<&str>) {
+    let inside = drink.unwrap();
+    if inside =="lemonade" {panic!("AAAaaaaaa!!!!");}
+    println!("I love {}s is a nice drink.", inside);
+ }
+
+ fn f(){
+    println!(" the thread is running");
+    let id = thread::current().id();
+    println!(" the thread id is {:?}", id);
+ }
+ fn s(){
+    println!(" the thread is running");
+    let id = thread::current().id();
+    println!(" the thread id is {:?}", id);
+    
  }
  
