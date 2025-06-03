@@ -30,7 +30,19 @@ impl Client{
         //println!("{} is disconnected from {}", self.name, self.address);
     }
 
-    fn send_message(&self, message: &str, server_ip: IpAddr) {
+    fn send_message(&self, server_ip: IpAddr) {
+        //we wait for the user to send a message
+        let mut message = String::new();
+        println!(" Write ---> ");
+        loop {
+            message.clear();
+            io::stdin()
+                .read_line(&mut message)
+                .execpt("Failed to read line");
+            if disconnect(){
+                break;
+            }
+        }
 
         println!("{} sent: {}", self.name, message);
     }
