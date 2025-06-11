@@ -43,6 +43,7 @@ impl Client{
                 break;
             }
         }
+        
 
         println!("{} sent: {}", self.name, message);
     }
