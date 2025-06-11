@@ -43,7 +43,8 @@ impl Client{
                 break;
             }
         }
-        
+
+        //send the message to the server
 
         println!("{} sent: {}", self.name, message);
     }
