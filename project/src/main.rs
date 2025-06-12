@@ -48,6 +48,8 @@ use std::thread;
     }
     println!("the array is: {:?}", array);
 
+    println!("The has is : {:?} ", simple_hash(&input));
+
  }
 
  fn give_adult(drink: Option<&str>) {
@@ -76,3 +78,11 @@ use std::thread;
     
  }
  
+ fn simple_hash(input1: &str) -> u64 {
+    let mut hash: u64 = 0;
+    for (i, c) in input1.chars().enumerate() {
+        hash += (c as u64) * (i as u64 + 1);
+        hash ^= hash.rotate_left(7);
+    }
+    hash
+}
