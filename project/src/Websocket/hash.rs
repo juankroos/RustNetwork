@@ -6,6 +6,7 @@ fn simple_hash(input: &str) -> u64 {
     }
     hash
 }
+// ******Total incorporation******
 // To take  the  nessesary information from the input to hash
 fn input_hash( input: &str) -> u64 {
     let mut enu = input.chars.enumerate();
@@ -18,7 +19,7 @@ fn input_hash( input: &str) -> u64 {
     info;
 }
 
-// A more complex hash fucntion
+// A more complex hash fucntion that uses a prime number and a vector to store characters
 fn complexe_hash(input: &str) ->u64 {
     let mut hash : u64 = 0;
     let mut prime: u64 = 31;
