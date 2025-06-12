@@ -22,7 +22,7 @@ use std::thread;
     })*/
     
     //server::main1();
-    let water  = Some("water");
+    /*let water  = Some("water");
     let lemonade = Some("lemonade");
     let void  = None;
 
@@ -35,6 +35,13 @@ use std::thread;
 
     drink(coffee);
     drink(nothing);
+    */
+    let mut input = String::new();
+    println!("enter some texte:");
+    std::io::stdin().read_line(&mut input);
+    for (a, b) in input.chars().enumerate() {
+        println!("{}: {}", a, b);
+    }
 
  }
 
