@@ -37,11 +37,16 @@ use std::thread;
     drink(nothing);
     */
     let mut input = String::new();
+    let mut array = Vec::<String>::new();
     println!("enter some texte:");
     std::io::stdin().read_line(&mut input);
     for (a, b) in input.chars().enumerate() {
+        array.push(a.to_string());
+        array.push(b.to_string());
         println!("{}: {}", a, b);
+
     }
+    println!("the array is: {:?}", array);
 
  }
 
