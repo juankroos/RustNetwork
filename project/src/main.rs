@@ -1,4 +1,5 @@
 use std::thread;
+extern crate websocket;
 //use hex;
 //hex::encode(bytes);
 
@@ -6,6 +7,9 @@ use std::thread;
 //#[path = "E:/RustNetwork/project/Main/server.rs"]
 //mod server;
  fn main(){
+    websocket::websocket::client::main();
+    websocket::websocket::server::main();
+
     /*thread::spawn(f);
     thread::spawn(f);
     thread::spawn(s);
@@ -40,6 +44,7 @@ use std::thread;
     drink(coffee);
     drink(nothing);
     */
+    /* 
     let mut input = String::new();
     let mut array = Vec::<String>::new();
     println!("enter some texte:");
@@ -54,7 +59,7 @@ use std::thread;
 
     println!("The has is : {:?} ", simple_hash(&input));
     println!("The has is : {:x} ", simple_hash(&input));
-
+    */
  }
 
  fn give_adult(drink: Option<&str>) {
