@@ -1,4 +1,8 @@
 use std::thread;
+//use hex;
+//hex::encode(bytes);
+
+
 //#[path = "E:/RustNetwork/project/Main/server.rs"]
 //mod server;
  fn main(){
@@ -49,6 +53,7 @@ use std::thread;
     println!("the array is: {:?}", array);
 
     println!("The has is : {:?} ", simple_hash(&input));
+    println!("The has is : {:x} ", simple_hash(&input));
 
  }
 
@@ -82,7 +87,8 @@ use std::thread;
     let mut hash: u64 = 0;
     for (i, c) in input1.chars().enumerate() {
         hash += (c as u64) * (i as u64 + 1);
-        hash ^= hash.rotate_left(7);
+        hash ^= hash.rotate_left(13);
     }
     hash
+    
 }
