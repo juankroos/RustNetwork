@@ -1,1 +1,1 @@
-E:\RustNetwork\project\target\debug\project.exe: E:\RustNetwork\project\src\main.rs
+E:\RustNetwork\project\target\debug\project.exe: E:\RustNetwork\project\src\Websocket\mod.rs E:\RustNetwork\project\src\Websocket\poo.rs E:\RustNetwork\project\src\lib.rs E:\RustNetwork\project\src\main.rs
