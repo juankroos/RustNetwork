@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.leboncoin.fr/');
+  await page.goto('https://www.leboncoin.fr/ad/services_a_la_personne/2699618227');
 });
 
 const TODO_ITEMS = [
