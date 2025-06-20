@@ -12,7 +12,7 @@ fn simple_hash(input: &str) -> u64 {
 // ******Total incorporation******
 // To take  the  nessesary information from the input to hash
 fn input_hash( input: &str) -> u64 {
-    let mut enu = input.chars.enumerate();
+    let mut enu = input.chars.enumerate(); 
     let mut length = input.len();
     let mut size = mem::size_of(&input);
     let mut info: Vec<String>::new();
