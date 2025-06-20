@@ -1,5 +1,5 @@
 use std::thread;
-extern crate websocket;
+mod websocket;
 //use hex;
 //hex::encode(bytes);
 
@@ -7,8 +7,8 @@ extern crate websocket;
 //#[path = "E:/RustNetwork/project/Main/server.rs"]
 //mod server;
  fn main(){
-    websocket::websocket::client::main();
-    websocket::websocket::server::main();
+    websocket::poo::main_event();
+    //websocket::websocket::server::main();
 
     /*thread::spawn(f);
     thread::spawn(f);

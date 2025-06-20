@@ -1,8 +1,11 @@
 fn simple_hash(input: &str) -> u64 {
     let mut hash: u64 = 0;
+    let mut prime: u64 = 31;
     for (i, c) in input.chars().enumerate() {
-        hash += (c as u64) * (i as u64 + 1);
-        //hash ^= hash.rotate_left(7);
+        hash += (c as u64) * (i as u64 + 1) * prime;
+        //hash ^= hash.rotate_left(7); 
+        //hash = hash * prime + (c as u64);
+        //hash ^= hash.rotate_right(13);
     }
     hash
 }
