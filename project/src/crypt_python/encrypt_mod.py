@@ -6,5 +6,15 @@ token = f.encrypt(b"secret")
 print(f.decrypt(token))
 
 ##
-with open('filekey.key', 'wb') as f:
+with open('filekey.key', 'rb') as f:
     f.write(key)
+
+fernet = Fernet(key)
+
+with open('nba.csv', 'rb') as f:
+    original = f.read()
+
+encrypted = fernet.encrypt(original)
+
+with open('nba_encrypted.csv', 'wb') as f:
+    f.write(encrypted)
