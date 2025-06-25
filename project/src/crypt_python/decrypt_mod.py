@@ -13,3 +13,4 @@ decrypted = fernet.decrypt(encrypted)
 with open('nba.csv', 'rb') as f:
     f.write(decrypted)
 
+import hashlib
