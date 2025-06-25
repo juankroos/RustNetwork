@@ -1,50 +1,46 @@
-import requests
-import sys
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 
-# Fonction pour vérifier si un endpoint existe
-def check_endpoint(url):
-    try:
-        response = requests.get(url, timeout=5)
-        if response.status_code == 200:
-            print(f"[+] Endpoint trouvé : {url} (Code: {response.status_code})")
-            print(f"    Headers du serveur : {response.headers.get('Server', 'Non spécifié')}")
-            return True
-        else:
-            print(f"[-] Endpoint non accessible : {url} (Code: {response.status_code})")
-            return False
-    except requests.exceptions.RequestException as e:
-        print(f"[!] Erreur lors de l'accès à {url} : {e}")
-        return False
+element_list = []
 
-# Fonction principale
-def main():
-    if len(sys.argv) != 2:
-        print("Usage : python script.py <IP_ou_URL>")
-        sys.exit(1)
+# Set up Chrome options (optional)
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")  # Run in headless mode (optional)
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 
-    target = sys.argv[1]
-    if not target.startswith("http"):
-        target = f"http://{target}"
+# Use a proper Service object
+service = Service(ChromeDriverManager().install())
 
-    print(f"[*] Cible : {target}")
-    print("[*] Début de l'énumération...")
+for page in range(1, 3):
+    # Initialize driver properly
+    driver = webdriver.Chrome(service=service, options=options)
 
-    # Liste d'endpoints courants à vérifier
-    endpoints = [
-        "/", "/index.html", "/admin", "/login", "/phpinfo.php", 
-        "/.htaccess", "/config", "/backup", "/api","/test", "/wp-admin"
-    ]
+    # Load the URL
+    url = f"https://leboncoin.fr/voitures/offres/?page={page}"
+    driver.get(url)
+    time.sleep(2)  # Optional wait to ensure page loads
 
-    # Vérification des endpoints
-    for endpoint in endpoints:
-        check_endpoint(f"{target}{endpoint}")
+    # Extract product details
+    titles = driver.find_elements(By.CLASS_NAME, "title")
+    prices = driver.find_elements(By.CLASS_NAME, "price")
+    descriptions = driver.find_elements(By.CLASS_NAME, "description")
+    ratings = driver.find_elements(By.CLASS_NAME, "ratings")
 
-    # Vérification des méthodes HTTP supportées
-    try:
-        response = requests.options(target)
-        print(f"[*] Méthodes HTTP supportées : {response.headers.get('Allow', 'Non spécifié')}")
-    except requests.exceptions.RequestException as e:
-        print(f"[!] Erreur lors de la vérification des méthodes HTTP : {e}")
+    # Store results in a list
+    for i in range(len(titles)):
+        element_list.append([
+            titles[i].text,
+            prices[i].text,
+            descriptions[i].text,
+            ratings[i].text
+        ])
 
-if __name__ == "__main__":
-    main()
+    driver.quit()
+
+# Display extracted data
+for row in element_list:
+    print(row)
