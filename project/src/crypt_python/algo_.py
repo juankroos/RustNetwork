@@ -35,6 +35,12 @@ def hash_file(file_path):
 
 if __name__ == "__main__":
     file = 'E:\RustNetwork\project\src\crypt_python\mr hero.txt'
-    hash_file(file)
+    #hash_file(file)
+    files = open(file, 'r')
+    line  = files.seek(0)
+    print("###########################")
+    print(files.read())
+    
+        
     #with open(file, 'rb') as f:
     #    print(f.read())
