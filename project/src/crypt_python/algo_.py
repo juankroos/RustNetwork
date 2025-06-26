@@ -23,10 +23,14 @@ def hash_file(file_path):
         hash_ = hashlib.sha256(hash_).hexdigest()
         print(hash_)
         
-        with open(r'./hash1.txt','w') as fi:
+        with open(r'./hash1.txt','r') as fi:
             entry = f"file: {file}"+"date: "+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+","+"hash: "+hash_+'\n'
-            fi.write(entry)
+            previous_state = fi.read()
             fi.close()
+            with open(r'./hash1.txt','w') as fi:
+                fi.write(previous_state)
+                fi.write(entry)
+                fi.close()
 
 
 if __name__ == "__main__":
