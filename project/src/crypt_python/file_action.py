@@ -50,4 +50,13 @@ def Rename(src_path, new_name):
             print(f"Source file {src_path} does not exist.")
         return False
 
-        
+#simple one
+def insert(file_path,data):
+    with open(file_path, 'a') as f:
+        #content = f.read()
+        for count, line in enumerate(file):
+            if data in line:
+                print(f'found a match line----{count}: {line.strip()}')
+
+            else:
+                print('theres no match')

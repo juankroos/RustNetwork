@@ -39,8 +39,36 @@ if __name__ == "__main__":
     files = open(file, 'r')
     line  = files.seek(0)
     print("###########################")
-    print(files.read())
-    
+    #print(files.read())
+    print(files.tell())
+    for count, line in enumerate(files):
+        print(f"Line {count}: {line.strip()}\n")
         
     #with open(file, 'rb') as f:
     #    print(f.read())
+
+def insert(file_path,data, new_data):
+    with open(file_path, 'a') as f:
+        #content = f.read()
+        for count, line in enumerate(file):
+            if data in line:
+                print(f'found a match line----{count}: {line.strip()}')
+                # change the line
+                new_line = line.replace(data, new_data)
+
+            else:
+                print('theres no match')
+
+#hash line per line
+def hash_line(src_path):
+    entry = " "
+    with open(src_path, 'rb') as f:
+        for count, line in enumerate(f):
+            hash_ = hashlib.sha256(line.encode()).hexdigest()
+            entry =f' {hash_}\n + {entry}'
+            with open(src_path, 'w') as f:
+                f.write(entry+ '\n')
+
+        f.close()
+    print(f"hashing completed for -------- {src_path}.")
+            
