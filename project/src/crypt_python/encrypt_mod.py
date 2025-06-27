@@ -41,14 +41,14 @@ def enc_file(input1):
     return a
 
 def decr_file(input1):
-    lib = 'abcdefghijklmnopqrstuvwxyz'
+    lib = 'abcdefghijklmnopqrstuvwxyz '
     new_input = np.array([])
-    key = 5
+    key = 2
     #count = 0
     for i in input1:
         for j in lib:
             if i == j:
-                index = (lib.index(j) - key) % len(lib)
+                index = (lib.index(j) + key) % len(lib)
                 value = lib[index]
                 new_input = np.append(new_input, value)
                 #print(f"the index of {i} is {index} and the count is {lib.index(j)} ...blabla {value}")
@@ -61,7 +61,7 @@ def decr_file(input1):
 
 if __name__ == "__main__":
     #some = input("Enter a string to encrypt: ")
-    some = 'helloahhh'
+    some = 'hello ahhh'
     res = enc_file(some)
     print (res)
     req = decr_file(res)
