@@ -25,17 +25,19 @@ with open(r'E:\RustNetwork\project\src\crypt_python\nba_encrypted.csv', 'wb') as
 def enc_file():
     input1 = "juan"
     lib = 'abcdefghijklmnopqrstuvwxyz'
-    new_input = np.array([], dtype='U1')
+    new_input = np.array([])
     key = 2
     count = 0
     for i in input1:
         for j in lib:
             if i == j:
                 index = lib.index(j) + key % len(lib)
-                #new_input.__add__(index)
-                print(f"the index of {i} is {index} and the count is {lib.index(j)}")
+                value = lib[index]
+                new_input = np.append(value, new_input)
+                print(f"the index of {i} is {index} and the count is {lib.index(j)}...blabla {value}")
                 #count +=0
-    print(new_input)
+    a = ' '.join(new_input)
+    print(f"the new input is {a}")
 
 if __name__ == "__main__":
     enc_file()
