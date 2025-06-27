@@ -36,7 +36,7 @@ def enc_file():
                 new_input = np.append(value, new_input)
                 print(f"the index of {i} is {index} and the count is {lib.index(j)}...blabla {value}")
                 #count +=0
-    a = ' '.join(new_input)
+    #a = ' '.join(new_input)
     print(f"the new input is {a}")
 
 if __name__ == "__main__":
