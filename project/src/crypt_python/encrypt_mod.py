@@ -1,4 +1,6 @@
 from cryptography.fernet import Fernet
+import numpy as np
+from array import array
 
 key = Fernet.generate_key()
 f = Fernet(key)
@@ -6,15 +8,35 @@ token = f.encrypt(b"secret")
 print(f.decrypt(token))
 
 ##
-with open('filekey.key', 'rb') as f:
-    f.write(key)
+with open(r'E:\RustNetwork\project\src\crypt_python\mr hero.txt', 'w') as f:
+    f.write(key.decode())
 
 fernet = Fernet(key)
 
-with open('nba.csv', 'rb') as f:
+with open(r'E:\RustNetwork\project\src\crypt_python\nba.csv', 'rb') as f:
     original = f.read()
 
 encrypted = fernet.encrypt(original)
 
-with open('nba_encrypted.csv', 'wb') as f:
+with open(r'E:\RustNetwork\project\src\crypt_python\nba_encrypted.csv', 'wb') as f:
     f.write(encrypted)
+
+#simple encryption too simple 
+def enc_file():
+    input1 = "juan"
+    lib = 'abcdefghijklmnopqrstuvwxyz'
+    new_input = np.array([], dtype='U1')
+    key = 2
+    count = 0
+    for i in input1:
+        for j in lib:
+            if i == j:
+                index = lib.index(j) + key % len(lib)
+                #new_input.__add__(index)
+                print(f"the index of {i} is {index} and the count is {lib.index(j)}")
+                #count +=0
+    print(new_input)
+
+if __name__ == "__main__":
+    enc_file()
+   

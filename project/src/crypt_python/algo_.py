@@ -32,21 +32,6 @@ def hash_file(file_path):
                 fi.write(entry)
                 fi.close()
 
-
-if __name__ == "__main__":
-    file = 'E:\RustNetwork\project\src\crypt_python\mr hero.txt'
-    #hash_file(file)
-    files = open(file, 'r')
-    line  = files.seek(0)
-    print("###########################")
-    #print(files.read())
-    print(files.tell())
-    for count, line in enumerate(files):
-        print(f"Line {count}: {line.strip()}\n")
-        
-    #with open(file, 'rb') as f:
-    #    print(f.read())
-
 def insert(file_path,data, new_data):
     with open(file_path, 'a') as f:
         #content = f.read()
@@ -64,11 +49,41 @@ def hash_line(src_path):
     entry = " "
     with open(src_path, 'rb') as f:
         for count, line in enumerate(f):
-            hash_ = hashlib.sha256(line.encode()).hexdigest()
+            hash_ = hashlib.sha256(line).hexdigest()
             entry =f' {hash_}\n + {entry}'
             with open(src_path, 'w') as f:
                 f.write(entry+ '\n')
 
         f.close()
     print(f"hashing completed for -------- {src_path}.")
-            
+    return print()
+
+import hashlib
+
+def hash_line1(src_path, dest_path):
+    with open(src_path, 'rb') as f_in, open(dest_path, 'w') as f_out:
+        for count, line in enumerate(f_in):
+            hash_ = hashlib.sha256(line).hexdigest()
+            f_out.write(f"{hash_}  # ligne {count + 1}\n")
+    
+    print(f"✅ Hashing terminé pour {src_path}, résultats dans {dest_path}.")
+
+
+
+
+
+if __name__ == "__main__":
+    file = 'E:\RustNetwork\project\src\crypt_python\mr hero.txt'
+    #hash_file(file)
+    files = open(file, 'r')
+    line  = files.seek(0)
+    print("###########################")
+    #print(files.read())
+    print(files.tell())
+    hash_line1(file)
+    #for count, line in enumerate(files):
+    #    print(f"Line {count}: {line.strip()}\n")
+        
+    #with open(file, 'rb') as f:
+    #    print(f.read())
+
