@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats du Scraping Leboncoin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Annonces Leboncoin Scrapées</h1>
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 p-2">URL</th>
+                    <th class="border border-gray-300 p-2">Titre</th>
+                    <th class="border border-gray-300 p-2">Prix</th>
+                    <th class="border border-gray-300 p-2">Lien Annonce</th>
+                    <th class="border border-gray-300 p-2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td class="border border-gray-300 p-2">{{ result[0] }}</td>
+                    <td class="border border-gray-300 p-2">{{ result[1] }}</td>
+                    <td class="border border-gray-300 p-2">{{ result[2] }}</td>
+                    <td class="border border-gray-300 p-2"><a href="{{ result[3] }}" class="text-blue-600 hover:underline" target="_blank">Voir l'annonce</a></td>
+                    <td class="border border-gray-300 p-2">{{ result[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
