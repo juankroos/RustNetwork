@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leboncoin Ads Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    #root {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Composant AdCard
+    const AdCard = ({ ad }) => (
+      <div className="bg-white shadow-sm rounded-lg p-2 mb-2 border border-gray-200 flex items-center space-x-4 text-sm">
+        <div className="w-20 h-20 flex-shrink-0">
+          {ad.image_url !== "Non spécifié" && (
+            <img src={ad.image_url} alt={ad.title} className="w-full h-full object-cover rounded" />
+          )}
+        </div>
+        <div className="flex-1">
+          <h2 className="font-semibold text-gray-800 line-clamp-1">{ad.title || "Non spécifié"}</h2>
+          <p className="text-green-600 font-medium mt-1">{ad.price || "Non spécifié"}</p>
+          <p className="text-gray-600">Cat: {ad.category || "Non spécifié"}</p>
+          <p className="text-gray-600">Loc: {ad.location || "Non spécifié"}</p>
+          <p className="text-gray-600">Date: {ad.date || "Non spécifié"}</p>
+          <a href={ad.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline text-xs">
+            Voir
+          </a>
+          {ad.tags.length > 0 && (
+            <div className="mt-1">
+              {ad.tags.map((tag, index) => (
+                <span key={index} className="bg-gray-200 text-gray-800 text-xs px-1 py-0.5 rounded-full mr-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          <p className="text-xs text-gray-500 mt-1">Page: {ad.page_source}</p>
+        </div>
+      </div>
+    );
+
+    // Composant principal App
+    const App = () => {
+      const [ads, setAds] = React.useState([]);
+
+      React.useEffect(() => {
+        const jsonData = `[
+          {"title": "Voiture POLO", "price": "600 €", "category": "Voitures", "location": "Le Blanc-Mesnil 93150", "date": "aujourd’hui à 08:33", "url": "https://www.leboncoin.fr/ad/voitures/3011238182", "image_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/e1/93/c1/e193c1743f17bad5f415bb7990e66d027a4d50e5.jpg?rule=ad-image", "tags": ["Paiement sécurisé"], "page_source": "page_1"},
+          {"title": "A 5 min* en voiture du centre-ville - Cogolin", "price": "483 000 €", "category": "Ventes immobilières", "location": "Cogolin 83310", "date": "Non spécifié", "url": "https://www.leboncoin.fr/ad/ventes_immobilieres/2853564415", "image_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/38/fb/98/38fb9876543210abcdef1234567890abcd123456.jpg?rule=ad-image", "tags": ["Pro", "Neuf"], "page_source": "page_2"}
+        ]`;
+        setAds(JSON.parse(jsonData));
+      }, []);
+
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <header className="bg-blue-600 text-white p-4 text-center">
+            <h1 className="text-2xl font-bold">Leboncoin Ads Viewer</h1>
+          </header>
+          <main className="container mx-auto py-6">
+            <h2 className="text-xl font-semibold mb-4">Liste des annonces ({ads.length})</h2>
+            {ads.length === 0 ? (
+              <p className="text-center text-gray-500">Aucune annonce disponible.</p>
+            ) : (
+              <div className="space-y-2">
+                {ads.map((ad, index) => (
+                  <AdCard key={index} ad={ad} />
+                ))}
+              </div>
+            )}
+          </main>
+        </div>
+      );
+    };
+
+    // Rendu dans le DOM
+    const rootElement = document.getElementById("root");
+    ReactDOM.render(<App />, rootElement);
+  </script>
+</body>
+</html>
