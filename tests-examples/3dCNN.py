@@ -302,7 +302,7 @@ model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categ
 model.summary()
 
 # Train the model
-model.fit(X_train, y_train, epochs=100, callbacks=[tb_callback])  # Reduced epochs for efficiency
+model.fit(X_train, y_train, epochs=300, callbacks=[tb_callback])  # Reduced epochs for efficiency
 
 # Make predictions
 res = model.predict(X_test)
