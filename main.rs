@@ -77,6 +77,7 @@ fn main() {
 
     /*0
     io::stdin()
+
         .read_line(&mut guess)
         .expect("failed to read the line");
     println!("you tap: {}",guess);
